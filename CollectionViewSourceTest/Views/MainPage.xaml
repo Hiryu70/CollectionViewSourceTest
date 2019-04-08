@@ -12,75 +12,79 @@
     </Page.DataContext>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Margin="20,20,0,0">
-            <StackPanel.Resources>
-                <ResourceDictionary>
+        <ScrollViewer>
+            <StackPanel Margin="20,20,0,0">
+                <StackPanel.Resources>
+                    <ResourceDictionary>
 
-                    <CollectionViewSource x:Key="CvsDevices"
-                                          x:Name="CvsDevices"
-                                          IsSourceGrouped="True"
-                                          Source="{x:Bind ViewModel.GroupedDevices, Mode=OneWay}" />
+                        <CollectionViewSource x:Key="CvsDevices"
+                                              x:Name="CvsDevices"
+                                              IsSourceGrouped="True"
+                                              Source="{x:Bind ViewModel.GroupedDevices, Mode=OneWay}" />
 
-                    <DataTemplate x:Key="DeviceTemplate"
-                                  x:DataType="models:DeviceGroup">
-                        <Grid Margin="5"
-                              BorderBrush="CornflowerBlue"
-                              BorderThickness="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="0"
-                                       Text="Name" />
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="1"
-                                       Text="{Binding Name}" />
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="0"
-                                       Text="CommTypeId" />
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="{Binding CommTypeId}" />
-                            <TextBlock Grid.Row="2"
-                                       Grid.Column="0"
-                                       Text="DeviceTypeId" />
-                            <TextBlock Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="{Binding DeviceTypeId}" />
-                        </Grid>
-                    </DataTemplate>
+                        <DataTemplate x:Key="DeviceTemplate"
+                                      x:DataType="models:DeviceGroup">
+                            <Grid Margin="5"
+                                  BorderBrush="CornflowerBlue"
+                                  BorderThickness="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="Name" />
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="1"
+                                           Text="{Binding Name}" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="0"
+                                           Text="CommTypeId" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding CommTypeId}" />
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="0"
+                                           Text="DeviceTypeId" />
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           Text="{Binding DeviceTypeId}" />
+                            </Grid>
+                        </DataTemplate>
 
-                    <DataTemplate x:Key="HeaderTemplate"
-                                  x:DataType="models:DeviceGroup">
-                        <StackPanel Background="Coral"  Orientation="Horizontal">
-                            <TextBlock Margin="5"
-                                       Text="DeviceType" />
-                            <TextBlock Margin="5"
-                                       Text="{x:Bind Key}" />
-                        </StackPanel>
-                    </DataTemplate>
+                        <DataTemplate x:Key="HeaderTemplate"
+                                      x:DataType="models:DeviceGroup">
+                            <StackPanel Background="Coral"
+                                        Orientation="Horizontal">
+                                <TextBlock Margin="5"
+                                           Text="DeviceType" />
+                                <TextBlock Margin="5"
+                                           Text="{x:Bind Key}" />
+                            </StackPanel>
+                        </DataTemplate>
 
-                </ResourceDictionary>
+                    </ResourceDictionary>
 
-            </StackPanel.Resources>
+                </StackPanel.Resources>
 
-            <ComboBox Header="CommType"
-                      ItemsSource="{Binding CommTypes, Mode=TwoWay}"
-                      SelectedItem="{Binding SelectedCommType, Mode=TwoWay}" />
+                <Button Click="{x:Bind ViewModel.Add}">Add Device</Button>
 
-            <ListView ItemTemplate="{StaticResource DeviceTemplate}"
-                      ItemsSource="{x:Bind CvsDevices.View, Mode=OneWay}">
-                <ListView.GroupStyle>
-                    <GroupStyle HeaderTemplate="{StaticResource HeaderTemplate}" />
-                </ListView.GroupStyle>
-            </ListView>
+                <ComboBox Header="CommType"
+                          ItemsSource="{Binding CommTypes, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedCommType, Mode=TwoWay}" />
 
-        </StackPanel>
+                <ListView ItemTemplate="{StaticResource DeviceTemplate}"
+                          ItemsSource="{x:Bind CvsDevices.View, Mode=OneWay}">
+                    <ListView.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource HeaderTemplate}" />
+                    </ListView.GroupStyle>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </RelativePanel>
 </Page>

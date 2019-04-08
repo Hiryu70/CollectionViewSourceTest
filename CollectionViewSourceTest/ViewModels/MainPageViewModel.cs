@@ -52,5 +52,11 @@ namespace CollectionViewSourceTest.ViewModels
             get => _groupedDevices;
             private set => Set(ref _groupedDevices, value);
         }
+
+        public void Add()
+        {
+            _devices.Add(new Device(){CommTypeId = 0, DeviceTypeId = 4, Name = "NewDevice"});
+            RaisePropertyChanged(nameof(GroupedDevices));
+        }
     }
 }
